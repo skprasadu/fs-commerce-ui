@@ -18,6 +18,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import {
   OKTA_CONFIG,
@@ -82,7 +83,8 @@ const routes: Routes = [
     OktaAuthModule
   ],
   providers: [ProductService, { provide: OKTA_CONFIG, useValue: oktaConfig },
-              {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+              {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
+             {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
